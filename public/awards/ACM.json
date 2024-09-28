@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "competition": "ACM 1",
+    "grade": "一等奖",
+    "time": "2021.7"
+  },
+  {
+    "id": 2,
+    "competition": "ACM 2",
+    "grade": "二等奖",
+    "time": "2022.7"
+  },
+  {
+    "id": 3,
+    "competition": "ACM 3",
+    "grade": "三等奖",
+    "time": "2023.7"
+  },
+  {
+    "id": 4,
+    "competition": "ACM 4",
+    "grade": "第四名",
+    "time": "2024.7"
+  }
+]

@@ -74,27 +74,6 @@ const loadData = async () => {
       membersInfo.value.push(require("/public/members/" + path));
     }
   }
-
-  // let fileList = [];
-  // await fetch("/members/total.json")
-  //   .then((response) => response.json())
-  //   .then((res) => {
-  //     fileList = res["list"];
-  //   })
-  //   .catch((err) => {
-  //     console.log("err", err);
-  //   });
-  // for (const path of fileList) {
-  //   const realPath = "/members/" + path;
-  //   await fetch(realPath)
-  //     .then((response) => response.json())
-  //     .then((res) => {
-  //       membersInfo.value.push(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log("err", err);
-  //     });
-  // }
   if (!isSmallWidth.value) {
     // 宽屏分左右
     let i = 0;
@@ -111,9 +90,10 @@ const loadData = async () => {
 // 是否为窄屏，窄屏单列排布
 const isSmallWidth = ref(false);
 const getWidthAndHeight = () => {
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-  isSmallWidth.value = width / height < 1.5;
+  // 显示宽高比小于1.5或屏幕宽高比小于1.5，判定为窄屏
+  isSmallWidth.value =
+    window.innerWidth / window.innerHeight < 1.5 ||
+    window.screen.width / window.screen.height < 1.5;
 };
 onMounted(() => {
   window.addEventListener("resize", getWidthAndHeight);
