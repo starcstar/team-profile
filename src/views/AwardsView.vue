@@ -1,10 +1,11 @@
 <template>
   <div id="awards-view">
     <a-row>
-      <h1 style="margin: 20px">获奖展示</h1>
+      <h1 style="margin: 0 20px">获奖展示</h1>
     </a-row>
     <a-row>
       <a-col :span="3">
+        <!--倒序选择框-->
         <div style="display: flex; flex-direction: column; margin: 20px">
           <a-checkbox
             :checked="!!pendingProps.reverse"
@@ -20,52 +21,48 @@
           <a-tab-pane key="1" title="ACM">
             <div class="tabs">
               <a-card :bordered="false">
-                <a-row>
-                  <a-timeline
-                    class="timeline"
-                    label-position="relative"
-                    mode="alternate"
-                    v-bind="pendingProps"
-                  >
-                    <template v-if="pendingProps.hasPendingDot" #dot>
-                      <IconFire :style="{ color: '#e70a0a' }" />
-                    </template>
-                    <AwardTimeItem
-                      v-for="item of acmAwardsList"
-                      :key="item.id"
-                      :time="item.time"
-                      :competition="item.competition"
-                      :grade="item.grade"
-                      :pic="item?.pic"
-                    />
-                  </a-timeline>
-                </a-row>
+                <a-timeline
+                  class="timeline"
+                  label-position="relative"
+                  mode="alternate"
+                  v-bind="pendingProps"
+                >
+                  <template v-if="pendingProps.hasPendingDot" #dot>
+                    <IconFire :style="{ color: '#e70a0a' }" />
+                  </template>
+                  <AwardTimeItem
+                    v-for="item of acmAwardsList"
+                    :key="item.id"
+                    :time="item.time"
+                    :competition="item.competition"
+                    :grade="item.grade"
+                    :pic="item?.pic"
+                  />
+                </a-timeline>
               </a-card>
             </div>
           </a-tab-pane>
           <a-tab-pane key="2" title="CTF">
             <div class="tabs">
               <a-card :bordered="false">
-                <a-row>
-                  <a-timeline
-                    class="timeline"
-                    label-position="relative"
-                    mode="alternate"
-                    v-bind="pendingProps"
-                  >
-                    <template v-if="pendingProps.hasPendingDot" #dot>
-                      <IconFire :style="{ color: '#e70a0a' }" />
-                    </template>
-                    <AwardTimeItem
-                      v-for="item of ctfAwardsList"
-                      :key="item.id"
-                      :time="item.time"
-                      :competition="item.competition"
-                      :grade="item.grade"
-                      :pic="item?.pic"
-                    />
-                  </a-timeline>
-                </a-row>
+                <a-timeline
+                  class="timeline"
+                  label-position="relative"
+                  mode="alternate"
+                  v-bind="pendingProps"
+                >
+                  <template v-if="pendingProps.hasPendingDot" #dot>
+                    <IconFire :style="{ color: '#e70a0a' }" />
+                  </template>
+                  <AwardTimeItem
+                    v-for="item of ctfAwardsList"
+                    :key="item.id"
+                    :time="item.time"
+                    :competition="item.competition"
+                    :grade="item.grade"
+                    :pic="item?.pic"
+                  />
+                </a-timeline>
               </a-card>
             </div>
           </a-tab-pane>
@@ -119,6 +116,7 @@ onMounted(() => {
 }
 
 .timeline {
+  padding-top: 16px;
   width: 100%;
 }
 

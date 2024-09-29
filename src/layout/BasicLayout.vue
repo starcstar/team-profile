@@ -5,13 +5,13 @@ import GlobalHeader from "@/components/GlobalHeader.vue";
 <template>
   <div id="basicLayout">
     <a-layout style="min-height: 100vh">
-      <a-layout-header class="header">
+      <a-layout-header class="layout-header">
         <GlobalHeader />
       </a-layout-header>
-      <div class="container">
+      <div class="layout-container">
         <router-view />
       </div>
-      <a-layout-footer class="footer">*C* Team</a-layout-footer>
+      <a-layout-footer class="layout-footer">*C* Team</a-layout-footer>
     </a-layout>
   </div>
 </template>
@@ -20,7 +20,8 @@ import GlobalHeader from "@/components/GlobalHeader.vue";
 #basicLayout {
 }
 
-#basicLayout .header {
+#basicLayout .layout-header {
+  /* 盒子高度100px */
   background-color: white;
   position: absolute;
   height: 100px;
@@ -30,22 +31,27 @@ import GlobalHeader from "@/components/GlobalHeader.vue";
   box-shadow: #aaa 1px 1px 4px;
 }
 
-.container {
+.layout-container {
   position: relative;
   width: 80%;
-  margin: calc(0.5rem + 100px) auto calc(0.5rem + 50px);
+  /* 计算到页边的 margin */
+  margin: calc(0.5rem + 100px) auto calc(0.5rem + 50px) auto;
+  /* 计算盒子高度 */
   height: calc(100vh - 150px - 1rem);
+  /* 在盒子内进行滚动 */
   overscroll-behavior: contain;
   overflow: auto;
   box-shadow: #aaa 1px 1px 4px;
   border-radius: 16px;
+  padding-bottom: 8px;
 }
 
-#basicLayout .footer {
+#basicLayout .layout-footer {
+  /* 盒子高度50px */
   background-color: white;
   padding: 16px;
   position: absolute;
-  height: 18px;
+  height: 50px;
   bottom: 0;
   left: 0;
   right: 0;

@@ -1,45 +1,47 @@
 <template>
-  <h1 style="margin: 20px">成员展示</h1>
-  <a-row v-if="!isSmallWidth">
-    <a-col :span="12" style="height: 10rem; max-height: 200px">
-      <div v-for="item in leftMem" :key="item.id">
-        <MemberCard
-          :avatar="item.avatar"
-          :id="item.id"
-          :des="item.des"
-          :blogSite="item.blogSite"
-          :gitHub="item.gitHub"
-          :tags="item.tags"
-        ></MemberCard>
-      </div>
-    </a-col>
-    <a-col :span="12" style="height: 10rem; max-height: 200px">
-      <div v-for="item in rightMem" :key="item.id">
-        <MemberCard
-          :avatar="item.avatar"
-          :id="item.id"
-          :des="item.des"
-          :blogSite="item.blogSite"
-          :gitHub="item.gitHub"
-          :tags="item.tags"
-        ></MemberCard>
-      </div>
-    </a-col>
-  </a-row>
-  <a-row v-else>
-    <a-col :span="24" style="height: 10rem; max-height: 200px">
-      <div v-for="item in membersInfo" :key="item.id">
-        <MemberCard
-          :avatar="item.avatar"
-          :id="item.id"
-          :des="item.des"
-          :blogSite="item.blogSite"
-          :gitHub="item.gitHub"
-          :tags="item.tags"
-        ></MemberCard>
-      </div>
-    </a-col>
-  </a-row>
+  <div id="mem-view">
+    <h1 style="margin: 0 20px">成员展示</h1>
+    <a-row v-if="!isSmallWidth">
+      <a-col :span="12" style="height: 10rem; max-height: 200px">
+        <div v-for="item in leftMem" :key="item.id">
+          <MemberCard
+            :avatar="item.avatar"
+            :id="item.id"
+            :des="item.des"
+            :blogSite="item.blogSite"
+            :gitHub="item.gitHub"
+            :tags="item.tags"
+          ></MemberCard>
+        </div>
+      </a-col>
+      <a-col :span="12" style="height: 10rem; max-height: 200px">
+        <div v-for="item in rightMem" :key="item.id">
+          <MemberCard
+            :avatar="item.avatar"
+            :id="item.id"
+            :des="item.des"
+            :blogSite="item.blogSite"
+            :gitHub="item.gitHub"
+            :tags="item.tags"
+          ></MemberCard>
+        </div>
+      </a-col>
+    </a-row>
+    <a-row v-else>
+      <a-col :span="24" style="height: 10rem; max-height: 200px">
+        <div v-for="item in membersInfo" :key="item.id">
+          <MemberCard
+            :avatar="item.avatar"
+            :id="item.id"
+            :des="item.des"
+            :blogSite="item.blogSite"
+            :gitHub="item.gitHub"
+            :tags="item.tags"
+          ></MemberCard>
+        </div>
+      </a-col>
+    </a-row>
+  </div>
 </template>
 
 <script setup>
@@ -104,4 +106,7 @@ onUnmounted(() => {
   window.removeEventListener("resize", getWidthAndHeight);
 });
 </script>
-<style scoped></style>
+<style scoped>
+#mem-view {
+}
+</style>

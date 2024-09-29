@@ -18,12 +18,16 @@
             disabled
           >
             <div class="title-bar">
-              <img alt="oj-logo" class="logo" src="../assets/huaji.gif" />
+              <img
+                alt="team-logo"
+                class="team-logo"
+                src="../assets/huaji.gif"
+              />
               <div class="title">⭐C⭐ Team Welcomes You!</div>
             </div>
           </a-menu-item>
-          <a-menu-item v-for="item in visibleRoutes" :key="item.path"
-            >{{ item.name }}
+          <a-menu-item v-for="item in visibleRoutes" :key="item.path">
+            {{ item.name }}
           </a-menu-item>
         </a-menu>
       </a-col>
@@ -38,15 +42,14 @@ import { computed, ref } from "vue";
 // 路由
 const router = useRouter();
 const visibleRoutes = computed(() => {
-  return routes.filter((item, index) => {
+  return routes.filter((item) => {
     //是否在菜单中可见
-    if (item.meta?.hideInMenu) return false;
-    else return true;
+    return !item.meta?.hideInMenu;
   });
 });
 const selectedKeys = ref(["/"]); //默认是主页
 // 路由跳转时更新选中菜单项
-router.afterEach((to, from, failure) => {
+router.afterEach((to) => {
   selectedKeys.value = [to.path];
 });
 const doMenuClick = (key: string) => {
@@ -59,13 +62,13 @@ const doMenuClick = (key: string) => {
 }
 
 .title-bar {
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.logo {
-  height: 58px;
+.team-logo {
 }
 
 .title {
