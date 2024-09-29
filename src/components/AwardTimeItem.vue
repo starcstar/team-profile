@@ -79,12 +79,8 @@ const props = withDefaults(defineProps<Props>(), {
     <template #dot>
       <img
         :src="handleReward(props.grade)"
+        class="award-dot"
         :style="{
-          width: '24px',
-          height: '24px',
-          padding: '4px',
-          boxSizing: 'border-box',
-          borderRadius: '50%',
           backgroundColor: handleRewardColor(props.grade),
         }"
       />
@@ -98,4 +94,12 @@ const props = withDefaults(defineProps<Props>(), {
   </a-timeline-item>
 </template>
 
-<style scoped></style>
+<style scoped>
+.award-dot {
+  width: 24px !important;
+  height: 24px;
+  padding: 4px;
+  box-sizing: border-box;
+  border-radius: 50%;
+}
+</style>

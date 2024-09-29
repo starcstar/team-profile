@@ -52,7 +52,7 @@ onUnmounted(() => {
 #banner {
   width: 100%;
   min-height: 20rem;
-  //background-color: brown;
+  /* background-color: brown; */
   background-color: rgb(0, 0, 0, 0);
   place-items: center;
   display: grid;
