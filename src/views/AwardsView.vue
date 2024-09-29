@@ -8,7 +8,7 @@
         <!--倒序选择框-->
         <div style="display: flex; flex-direction: column; margin: 20px">
           <a-checkbox
-            :checked="!!pendingProps.reverse"
+            v-model="pendingProps.reverse"
             @change="(v) => onChange({ reverse: v })"
             style="font-size: 16px"
           >
@@ -88,6 +88,7 @@ import AwardTimeItem from "@/components/AwardTimeItem.vue";
 const pendingProps = ref({
   pending: "Comming soon...",
   hasPendingDot: true,
+  reverse: true,
 });
 
 const onChange = (newProps) => {

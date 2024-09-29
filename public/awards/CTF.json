@@ -23,8 +23,7 @@
     "competition": "江苏省网络空间安全竞赛暨 XCTF 国际信息安全联赛南京站",
     "grade": "冠军",
     "time": "2017.04"
-  },
-  {
+  }, {
     "id": 5,
     "competition": "X-NUCA 全国高校网安联赛个人赛",
     "grade": "冠军",
@@ -113,5 +112,61 @@
     "competition": "领航杯",
     "grade": "二等奖",
     "time": "2021.9"
+  },
+  {
+    "id": 21,
+    "competition": "第十四届全国大学生信息安全竞赛华东赛区",
+    "grade": "一等奖",
+    "time": "2022.6",
+    "pic": "https://asuri.club/img/21.png"
+  },
+  {
+    "id": 22,
+    "competition": "第十五届全国大学生信息安全竞赛总决赛",
+    "grade": "一等奖",
+    "time": "2022.8",
+    "pic": "https://asuri.club/img/22.png"
+  },
+  {
+    "id": 23,
+    "competition": "网鼎杯网络安全大赛青龙组",
+    "grade": "季军",
+    "time": "2023.4",
+    "pic": "https://asuri.club/img/23.png"
+  },
+  {
+    "id": 24,
+    "competition": "第十六届全国大学生信息安全竞赛华东赛区",
+    "grade": "亚军",
+    "time": "2023.6",
+    "pic": "https://asuri.club/img/24.png"
+  },
+  {
+    "id": 25,
+    "competition": "第八届上海市大学生网络安全大赛",
+    "grade": "第四名",
+    "time": "2023.6",
+    "pic": "https://asuri.club/img/25.png"
+  },
+  {
+    "id": 26,
+    "competition": "第十六届全国大学生信息安全竞赛总决赛",
+    "grade": "一等奖",
+    "time": "2023.7",
+    "pic": "https://asuri.club/img/26.png"
+  },
+  {
+    "id": 27,
+    "competition": "2023年\"磐石行动\"上海市工业和信息化领域网络安全实战攻防活动",
+    "grade": "冠军",
+    "time": "2023.12",
+    "pic": "https://asuri.club/img/27.png"
+  },
+  {
+    "id": 28,
+    "competition": "第二届\"熵密杯\"密码安全挑战赛",
+    "grade": "三等奖",
+    "time": "2024.9",
+    "pic": "https://asuri.club/img/28.png"
   }
 ]
