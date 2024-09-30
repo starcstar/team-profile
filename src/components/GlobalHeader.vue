@@ -21,9 +21,11 @@
               <img
                 alt="team-logo"
                 class="team-logo"
-                src="../assets/huaji.gif"
+                width="60"
+                height="60"
+                src="../assets/logo.png"
               />
-              <div class="title">⭐C⭐ Team Welcomes You!</div>
+              <div class="title">*C* Team</div>
             </div>
           </a-menu-item>
           <a-menu-item v-for="item in visibleRoutes" :key="item.path">
