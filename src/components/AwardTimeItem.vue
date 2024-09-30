@@ -14,10 +14,15 @@ const handleReward = (grade) => {
     case "一":
     case "特":
     case "冠":
+    case "金":
       return rewardIcons.first;
     case "二":
+    case "亚":
+    case "银":
       return rewardIcons.second;
     case "三":
+    case "季":
+    case "铜":
       return rewardIcons.third;
     default:
       return rewardIcons.others;
@@ -34,10 +39,15 @@ const handleRewardColor = (grade) => {
     case "一":
     case "特":
     case "冠":
+    case "金":
       return rewardColors.first;
     case "二":
+    case "亚":
+    case "银":
       return rewardColors.second;
     case "三":
+    case "季":
+    case "铜":
       return rewardColors.third;
     default:
       return rewardColors.others;
