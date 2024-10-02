@@ -50,6 +50,15 @@
   border-left-width: 2px !important;
   transform: translateX(-50%);
 }
+blockquote::after {
+  content: "> " !important;
+  white-space: pre;
+  position: absolute;
+  top: 0;
+  left: 0;
+  line-height: var(--global-line-height);
+  color: #9ca2ab;
+}
 </style>
 <script setup lang="ts">
 import BasicLayout from "@/layout/BasicLayout.vue";

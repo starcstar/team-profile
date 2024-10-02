@@ -3,7 +3,6 @@ import MdViewer from "@/components/MdViewer.vue";
 import generalIntro from "/public/Introduction/General.md?"; // 使用 import 引入 md
 import acmIntro from "/public/Introduction/ACM.md?"; // 使用 import 引入 md
 import ctfIntro from "/public/Introduction/CTF.md?"; // 使用 import 引入 md
-import cssTest from "/public/Introduction/CssTest.md?";
 import { onMounted, onUnmounted, ref } from "vue"; // 使用 import 引入 md
 const isBoarded = ref(false);
 // 是否为窄屏，窄屏单列排布
@@ -25,7 +24,7 @@ onUnmounted(() => {
 
 <template>
   <div id="introduction-view">
-    <h1 style="margin: 0 20px" class="my-h1">团队介绍</h1>
+    <!--    <h1 style="margin: 0 20px" class="my-h1">团队介绍</h1>-->
     <!--    <BannerPics style="width: 100%" />-->
     <div class="intro-container">
       <a-card :bordered="isBoarded">
@@ -53,9 +52,6 @@ onUnmounted(() => {
           <MdViewer :value="ctfIntro" />
         </a-card>
       </div>
-      <a-card style="margin-bottom: 1rem" :bordered="true">
-        <MdViewer :value="cssTest" />
-      </a-card>
     </div>
   </div>
 </template>
@@ -70,11 +66,5 @@ onUnmounted(() => {
 
 .self-intro {
   padding: 8px;
-}
-
-.my-h1 {
-  //text-decoration: underline;
-  text-underline-color: black;
-  text-underline-offset: 8px;
 }
 </style>
