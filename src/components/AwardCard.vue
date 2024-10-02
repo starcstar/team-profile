@@ -74,8 +74,8 @@ const props = withDefaults(defineProps<Props>(), {
         >
           <a-image
             :style="{
-              width: '100%',
-              height: '100%',
+              maxHeight: '15rem',
+              objectFit: 'contain',
             }"
             alt="图片失踪了"
             :src="props.pic"

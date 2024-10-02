@@ -1,12 +1,10 @@
 import { RouteRecordRaw } from "vue-router";
 import IntroductionView from "@/views/IntroductionView.vue";
-import MemberView from "@/views/MemberView.vue";
-import AwardsView from "@/views/AwardsView.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "团队介绍",
+    name: "首页",
     component: IntroductionView,
     meta: {
       hideInMenu: false,
@@ -14,8 +12,9 @@ export const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/member",
-    name: "人员展示",
-    component: MemberView,
+    name: "成员展示",
+    component: () =>
+      import(/* webpackChunkName: "member" */ "../views/MemberView.vue"),
     meta: {
       hideInMenu: false,
     },
@@ -23,7 +22,8 @@ export const routes: Array<RouteRecordRaw> = [
   {
     path: "/awards",
     name: "获奖展示",
-    component: AwardsView,
+    component: () =>
+      import(/* webpackChunkName: "awards" */ "../views/AwardsView.vue"),
     meta: {
       hideInMenu: false,
     },
