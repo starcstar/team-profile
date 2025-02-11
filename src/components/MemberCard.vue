@@ -25,7 +25,7 @@ const props = withDefaults(defineProps<Props>(), {
   des: () => "default des",
   tags: () => ["default id"],
 });
-const toUrl = (url) => {
+const toUrl = (url: string) => {
   return window.open(url, "_blank");
 };
 </script>
@@ -36,8 +36,15 @@ const toUrl = (url) => {
       <a-row class="userInfo">
         <!--头像-->
         <a-col :span="8" style="min-height: 10rem">
-          <div style="place-items: center; display: grid">
-            <a-avatar style="height: 10rem; width: 10rem">
+          <div
+            style="
+              align-items: center;
+              justify-content: center;
+              display: grid;
+              margin: auto auto;
+            "
+          >
+            <a-avatar style="height: 100%; width: 100%">
               <img alt="avatar" :src="props.avatar" />
             </a-avatar>
           </div>
@@ -106,12 +113,13 @@ const toUrl = (url) => {
   display: flex;
   align-items: center;
   min-height: 120px;
+  overflow: auto;
 }
 
 .nickName {
   margin-bottom: 0;
   margin-top: 0;
-  font-size: 25px;
+  font-size: 1.5rem;
   color: black;
 }
 

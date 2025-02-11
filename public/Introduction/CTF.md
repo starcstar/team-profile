@@ -1,5 +1,5 @@
-## CTF Inrto
-<div align=center><img alt="logo" src="/img/Asuri.png" height="300"/></div>
+## CTF Intro
+<div align=center><img alt="logo" src="/img/Asuri.png" width="500vw"/></div>
 
 > ASURI: Asuri Secure yoUR Information.
 

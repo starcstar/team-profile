@@ -4,7 +4,7 @@ import GlobalHeader from "@/components/GlobalHeader.vue";
 
 <template>
   <div id="basicLayout">
-    <a-layout style="min-height: 100vh">
+    <a-layout style="min-height: 100dvh">
       <a-layout-header class="layout-header">
         <GlobalHeader />
       </a-layout-header>
@@ -37,7 +37,7 @@ import GlobalHeader from "@/components/GlobalHeader.vue";
   /* 计算到页边的 margin */
   margin: calc(0.5rem + 100px) auto calc(0.5rem + 50px) auto;
   /* 计算盒子高度 */
-  height: calc(100vh - 150px - 1rem);
+  height: calc(100dvh - 150px - 1rem);
   /* 在盒子内进行滚动 */
   overscroll-behavior: contain;
   overflow: auto;

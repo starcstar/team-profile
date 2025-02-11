@@ -21,8 +21,8 @@
               <img
                 alt="team-logo"
                 class="team-logo"
-                width="60"
-                height="60"
+                width="40rem"
+                height="40rem"
                 src="../assets/logo.png"
               />
               <div class="title">*C* Team</div>
