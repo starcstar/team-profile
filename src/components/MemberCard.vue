@@ -43,13 +43,11 @@ const handleIntersection = (entries: IntersectionObserverEntry[]) => {
 };
 
 const handleImageLoad = () => {
-  console.log("图片加载成功", props.avatar);
   isImageLoaded.value = true;
   isImageError.value = false;
 };
 
 const handleImageError = () => {
-  console.log("图片加载失败", props.avatar);
   isImageLoaded.value = false;
   isImageError.value = true;
 };

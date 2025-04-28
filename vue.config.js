@@ -5,8 +5,7 @@ const webpack = require('webpack');
 
 module.exports = defineConfig({
   transpileDependencies: true,
-  // 根据环境设置不同的根目录
-  publicPath: process.env.NODE_ENV === 'production' ? '/to-team-profile/' : '/',
+  publicPath: '/',
   chainWebpack: (config) => {
     // 处理 Markdown 文件
     config.module
