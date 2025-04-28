@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import moment from "moment/moment";
+import dayjs from "dayjs";
 import AwardCard from "@/components/AwardCard.vue";
 import { defineProps, withDefaults } from "vue";
 
@@ -9,7 +9,7 @@ const rewardIcons = {
   third: require("@/assets/awardIcons/third.svg"),
   others: require("@/assets/awardIcons/others.svg"),
 };
-const handleReward = (grade) => {
+const handleReward = (grade: string) => {
   switch (grade.slice(0, 1)) {
     case "一":
     case "特":
@@ -34,7 +34,7 @@ const rewardColors = {
   third: "orange",
   others: "#87ceeb",
 };
-const handleRewardColor = (grade) => {
+const handleRewardColor = (grade: string) => {
   switch (grade.slice(0, 1)) {
     case "一":
     case "特":
@@ -82,10 +82,7 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <a-timeline-item
-    :label="moment(props.time).format(`YYYY-MM`)"
-    :key="props.id"
-  >
+  <a-timeline-item :label="dayjs(props.time).format('YYYY-MM')" :key="props.id">
     <template #dot>
       <img
         :src="handleReward(props.grade)"
