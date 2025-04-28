@@ -1,19 +1,53 @@
 <script setup lang="ts">
-import { defineProps, ref, withDefaults } from "vue";
+import { defineProps, ref, withDefaults, onMounted, onUnmounted } from "vue";
 import { IconUp, IconDown } from "@arco-design/web-vue/es/icon";
 
 const isPicCard = ref(true);
 const isShowImg = ref(true);
+const isInViewport = ref(false);
+const isImageLoaded = ref(false);
+const isImageError = ref(false);
+const imageRef = ref<HTMLElement | null>(null);
+
 const handleClick = () => {
   isShowImg.value = !isShowImg.value;
 };
+
+const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+  const [entry] = entries;
+  if (entry.isIntersecting) {
+    isInViewport.value = true;
+    // 一旦图片进入视口，就停止观察
+    if (imageRef.value) {
+      observer.unobserve(imageRef.value);
+    }
+  }
+};
+
+const handleImageLoad = () => {
+  isImageLoaded.value = true;
+  isImageError.value = false;
+};
+
+const handleImageError = () => {
+  isImageLoaded.value = false;
+  isImageError.value = true;
+};
+
+const observer = new IntersectionObserver(handleIntersection, {
+  root: null,
+  rootMargin: "50px",
+  threshold: 0.1,
+});
+
 const rewardColors = {
   first: "gold",
   second: "gray",
   third: "orange",
   others: "arcoblue",
-};
-const handleRewardTag = (grade) => {
+} as const;
+
+const handleRewardTag = (grade: string): string => {
   switch (grade.slice(0, 1)) {
     case "一":
     case "特":
@@ -56,6 +90,20 @@ const props = withDefaults(defineProps<Props>(), {
   time: () => "1145-1-4",
   pic: () => "default pic",
 });
+
+// 组件挂载后开始观察
+onMounted(() => {
+  if (imageRef.value) {
+    observer.observe(imageRef.value);
+  }
+});
+
+// 组件卸载前停止观察
+onUnmounted(() => {
+  if (imageRef.value) {
+    observer.unobserve(imageRef.value);
+  }
+});
 </script>
 
 <template>
@@ -67,19 +115,31 @@ const props = withDefaults(defineProps<Props>(), {
     >
       <template #cover>
         <div
+          ref="imageRef"
           :style="{
             minHeight: '5rem',
           }"
           v-if="isShowImg"
         >
           <a-image
+            v-if="isInViewport"
             :style="{
               maxHeight: '15rem',
               objectFit: 'contain',
+              opacity: isImageLoaded ? 1 : 0,
+              transition: 'opacity 0.3s ease-in-out',
             }"
             alt="图片失踪了"
             :src="props.pic"
+            @load="handleImageLoad"
+            @error="handleImageError"
           />
+          <div v-if="!isImageLoaded && !isImageError" class="image-placeholder">
+            <a-spin />
+          </div>
+          <div v-if="isImageError" class="image-error">
+            <a-result status="error" title="图片加载失败" />
+          </div>
         </div>
       </template>
       <a-card-meta>
@@ -126,6 +186,7 @@ const props = withDefaults(defineProps<Props>(), {
 .icon-hover:hover {
   background-color: rgb(var(--gray-2));
 }
+
 #award-card {
   width: 100%;
 }
@@ -135,5 +196,24 @@ const props = withDefaults(defineProps<Props>(), {
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 8px;
+}
+
+.image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 5rem;
+  background-color: var(--color-fill-2);
+  border-radius: 4px;
+}
+
+.image-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 5rem;
+  background-color: var(--color-fill-2);
+  border-radius: 4px;
+  padding: 16px;
 }
 </style>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { IconGithub, IconLaunch } from "@arco-design/web-vue/es/icon";
-import { defineProps, withDefaults } from "vue";
+import { defineProps, withDefaults, ref, onMounted, onUnmounted } from "vue";
 
 /**
  定义组件属性类型
@@ -25,14 +25,68 @@ const props = withDefaults(defineProps<Props>(), {
   des: () => "default des",
   tags: () => ["default id"],
 });
+
+const isInViewport = ref(false);
+const isImageLoaded = ref(false);
+const isImageError = ref(false);
+const cardRef = ref<HTMLElement | null>(null);
+
+const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+  const [entry] = entries;
+  if (entry.isIntersecting) {
+    isInViewport.value = true;
+    // 一旦卡片进入视口，就停止观察
+    if (cardRef.value) {
+      observer.unobserve(cardRef.value);
+    }
+  }
+};
+
+const handleImageLoad = () => {
+  isImageLoaded.value = true;
+  isImageError.value = false;
+};
+
+const handleImageError = () => {
+  isImageLoaded.value = false;
+  isImageError.value = true;
+};
+
+const observer = new IntersectionObserver(handleIntersection, {
+  root: null,
+  rootMargin: "50px",
+  threshold: 0.1,
+});
+
 const toUrl = (url: string) => {
   return window.open(url, "_blank");
 };
+
+// 组件挂载后开始观察
+onMounted(() => {
+  if (cardRef.value) {
+    observer.observe(cardRef.value);
+  }
+});
+
+// 组件卸载前停止观察
+onUnmounted(() => {
+  if (cardRef.value) {
+    observer.unobserve(cardRef.value);
+  }
+});
 </script>
 
 <template>
-  <div id="member-card">
-    <a-card class="infoCard">
+  <div id="member-card" ref="cardRef">
+    <a-card
+      class="infoCard"
+      :style="{
+        opacity: isInViewport ? 1 : 0,
+        transform: isInViewport ? 'translateY(0)' : 'translateY(20px)',
+        transition: 'all 0.5s ease-out',
+      }"
+    >
       <a-row class="userInfo">
         <!--头像-->
         <a-col :span="8" style="min-height: 10rem">
@@ -45,7 +99,25 @@ const toUrl = (url: string) => {
             "
           >
             <a-avatar style="height: 100%; width: 100%">
-              <img alt="avatar" :src="props.avatar" loading="lazy" />
+              <img
+                alt="avatar"
+                :src="props.avatar"
+                :style="{
+                  opacity: isImageLoaded ? 1 : 0,
+                  transition: 'opacity 0.3s ease-in-out',
+                }"
+                @load="handleImageLoad"
+                @error="handleImageError"
+              />
+              <div
+                v-if="!isImageLoaded && !isImageError"
+                class="avatar-placeholder"
+              >
+                <a-spin />
+              </div>
+              <div v-if="isImageError" class="avatar-error">
+                <a-result status="error" title="头像加载失败" />
+              </div>
             </a-avatar>
           </div>
         </a-col>
@@ -126,5 +198,26 @@ const toUrl = (url: string) => {
 .member-description {
   color: #66666666;
   width: 100%;
+}
+
+.avatar-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-fill-2);
+  border-radius: 50%;
+}
+
+.avatar-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-fill-2);
+  border-radius: 50%;
+  padding: 8px;
 }
 </style>
