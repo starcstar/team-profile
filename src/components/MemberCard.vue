@@ -45,7 +45,7 @@ const toUrl = (url: string) => {
             "
           >
             <a-avatar style="height: 100%; width: 100%">
-              <img alt="avatar" :src="props.avatar" />
+              <img alt="avatar" :src="props.avatar" loading="lazy" />
             </a-avatar>
           </div>
         </a-col>

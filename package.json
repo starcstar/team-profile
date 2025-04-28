@@ -23,6 +23,7 @@
   "devDependencies": {
     "@arco-design/web-vue": "^2.56.2",
     "@icon-park/vue-next": "^1.4.2",
+    "@types/node": "^22.15.2",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "@vue/cli-plugin-babel": "~5.0.0",
