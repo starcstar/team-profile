@@ -43,18 +43,20 @@ const handleIntersection = (entries: IntersectionObserverEntry[]) => {
 };
 
 const handleImageLoad = () => {
+  console.log("图片加载成功", props.avatar);
   isImageLoaded.value = true;
   isImageError.value = false;
 };
 
 const handleImageError = () => {
+  console.log("图片加载失败", props.avatar);
   isImageLoaded.value = false;
   isImageError.value = true;
 };
 
 const observer = new IntersectionObserver(handleIntersection, {
   root: null,
-  rootMargin: "50px",
+  rootMargin: "200px", // 提前200px加载
   threshold: 0.1,
 });
 
@@ -98,27 +100,32 @@ onUnmounted(() => {
               margin: auto auto;
             "
           >
-            <a-avatar style="height: 100%; width: 100%">
-              <img
-                alt="avatar"
-                :src="props.avatar"
-                :style="{
-                  opacity: isImageLoaded ? 1 : 0,
-                  transition: 'opacity 0.3s ease-in-out',
-                }"
-                @load="handleImageLoad"
-                @error="handleImageError"
-              />
-              <div
-                v-if="!isImageLoaded && !isImageError"
-                class="avatar-placeholder"
-              >
-                <a-spin />
-              </div>
-              <div v-if="isImageError" class="avatar-error">
-                <a-result status="error" title="头像加载失败" />
-              </div>
-            </a-avatar>
+            <img
+              v-if="isInViewport"
+              :src="props.avatar"
+              alt="avatar"
+              @load="handleImageLoad"
+              @error="handleImageError"
+              style="
+                width: 100px;
+                height: 100px;
+                background: #f5f5f5;
+                border-radius: 50%;
+                object-fit: cover;
+                display: block;
+                margin: auto;
+                opacity: 1;
+              "
+            />
+            <div
+              v-if="!isImageLoaded && !isImageError && isInViewport"
+              class="avatar-placeholder"
+            >
+              <a-spin />
+            </div>
+            <div v-if="isImageError && isInViewport" class="avatar-error">
+              <a-result status="error" title="头像加载失败" />
+            </div>
           </div>
         </a-col>
         <a-col :span="2" />

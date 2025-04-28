@@ -17,7 +17,6 @@ const handleIntersection = (entries: IntersectionObserverEntry[]) => {
   const [entry] = entries;
   if (entry.isIntersecting) {
     isInViewport.value = true;
-    // 一旦图片进入视口，就停止观察
     if (imageRef.value) {
       observer.unobserve(imageRef.value);
     }
@@ -36,7 +35,7 @@ const handleImageError = () => {
 
 const observer = new IntersectionObserver(handleIntersection, {
   root: null,
-  rootMargin: "50px",
+  rootMargin: "200px",
   threshold: 0.1,
 });
 
@@ -134,10 +133,13 @@ onUnmounted(() => {
             @load="handleImageLoad"
             @error="handleImageError"
           />
-          <div v-if="!isImageLoaded && !isImageError" class="image-placeholder">
+          <div
+            v-if="!isImageLoaded && !isImageError && isInViewport"
+            class="image-placeholder"
+          >
             <a-spin />
           </div>
-          <div v-if="isImageError" class="image-error">
+          <div v-if="isImageError && isInViewport" class="image-error">
             <a-result status="error" title="图片加载失败" />
           </div>
         </div>
