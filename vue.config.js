@@ -7,10 +7,11 @@ module.exports = defineConfig({
   transpileDependencies: true,
   publicPath: "./",
   chainWebpack: (config) => {
+    // 处理 Markdown 文件
     config.module
       .rule("markdown")
       .test(/\.md$/)
-      .use("raw-loader") // 使用 raw-loader 处理 .md 文件
+      .use("raw-loader")
       .loader("raw-loader")
       .end();
 
@@ -33,21 +34,25 @@ module.exports = defineConfig({
           vendor: {
             test: /[\\/]node_modules[\\/]/,
             name(module) {
-              const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+              // 获取包名
+              const match = module.context?.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/);
+              if (!match) return 'vendor';
+              const packageName = match[1];
               return `npm.${packageName.replace('@', '')}`;
             },
+            priority: 10,
           },
           // 将 Vue 相关库打包在一起
           vue: {
             test: /[\\/]node_modules[\\/](vue|vue-router|vuex)[\\/]/,
             name: 'vue-vendor',
-            priority: 10,
+            priority: 20,
           },
           // 将 Arco Design 相关库打包在一起
           arco: {
             test: /[\\/]node_modules[\\/]@arco-design[\\/]/,
             name: 'arco-vendor',
-            priority: 20,
+            priority: 30,
           },
         },
       });
@@ -87,10 +92,6 @@ module.exports = defineConfig({
             extractComments: false,
           }),
         ],
-        performance: {
-          maxEntrypointSize: 10000000,
-          maxAssetSize: 30000000,
-        },
       };
     }
   },
